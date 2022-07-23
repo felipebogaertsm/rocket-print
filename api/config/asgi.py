@@ -1,11 +1,8 @@
-"""
-ASGI config for api project.
-
-It exposes the ASGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/4.0/howto/deployment/asgi/
-"""
+# -*- coding: utf-8 -*-
+# Licensed as the GNU General Public License as published by the Free Software
+# Foundation, version 3.
+# Author: Felipe Bogaerts de Mattos
+# Contact me at me@felipebm.com
 
 import os
 
