@@ -11,7 +11,7 @@ COPY ./ ./
 
 RUN chmod +x ./scripts/*
 
-RUN useradd admin
+RUN adduser admin -D -H
 RUN chown -R admin:admin /usr/app
 USER admin
 
