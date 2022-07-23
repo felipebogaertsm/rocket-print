@@ -17,8 +17,3 @@ body {
 	background: linear-gradient(180deg, rgba(39, 38, 53, 1) 0%, rgba(60, 59, 70, 1) 100%);
 	color: var(--light-color);
 }
-
-button {
-	padding: 1rem;
-	border-radius: 1rem;
-}

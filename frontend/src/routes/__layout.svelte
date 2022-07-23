@@ -1,6 +1,6 @@
 <script context="module">
 	// Components:
-	import Navbar from '../components/elements/navbar.svelte';
+	import Navbar from '../components/modules/navbar.svelte';
 
 	// Styles:
 	import '../app.css';
