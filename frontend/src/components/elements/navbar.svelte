@@ -1,4 +1,4 @@
-<navbar class="container"><a href="/">Início</a><a href="/">Sobre</a></navbar>
+<navbar class="container"><a href="/">Início</a><a href="/">Quem somos</a></navbar>
 
 <style>
 	a {

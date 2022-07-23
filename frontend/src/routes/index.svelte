@@ -1,1 +1,6 @@
-<h1>3D Maker Space</h1>
+<script>
+	// Components:
+	import HeroSection from '../components/modules/hero-section.svelte';
+</script>
+
+<HeroSection />
