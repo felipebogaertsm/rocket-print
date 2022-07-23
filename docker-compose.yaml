@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  api:
+    build: 
+      context: ./api/
+      dockerfile: Dockerfile
+    container_name: 3ms-api
+    ports:
+      - 8000:8000
+    volumes:
+      - ./api/:/usr/app/
+    entrypoint: >
+      bash -c "python3 manage.py migrate --no-input && 
+      python3 manage.py runserver 0.0.0.0:8000"
