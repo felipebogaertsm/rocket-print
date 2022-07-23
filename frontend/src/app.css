@@ -9,12 +9,11 @@
 	--gray-color: #A6A6A8;
 	--dark-color: #272635;
 	--accent-color: #B1E5F2;
-	--background-without-opacity: #E8E9F3;
 }
 
 body {
 	min-height: 100vh;
 	margin: 0;
-	background-color: var(--dark-color);
+	background: linear-gradient(180deg, rgba(39, 38, 53, 1) 0%, rgba(60, 59, 70, 1) 100%);
 	color: var(--light-color);
 }
