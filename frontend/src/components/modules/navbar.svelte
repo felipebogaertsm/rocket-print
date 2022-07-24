@@ -3,7 +3,7 @@
 <style>
 	a {
 		font-weight: bold;
-		color: var(--accent-color);
+		color: var(--primary-color);
 		text-decoration: none;
 	}
 
