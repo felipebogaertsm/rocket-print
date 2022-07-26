@@ -3,12 +3,33 @@ version: '3.9'
 services:
   api:
     build: 
-      context: ./api/
+      context: ./api
       dockerfile: Dockerfile
     container_name: 3ms-api
     ports:
-      - 8000:8000
+      - "8000:8000"
     volumes:
-      - ./api/:/usr/app/
+      - ./api/:/usr/app
     entrypoint: >
       python3 manage.py runserver 0.0.0.0:8000
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: 3ms-frontend
+    ports:
+      - "5173:5173"
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/usr/app/src
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.dev
+    restart: always
+    container_name: 3ms-nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+      - frontend
