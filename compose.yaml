@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres:13.7
+    container_name: 3ms-db
+    env_file:
+      - ./.envs/.env.dev
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.dev
+    restart: always
+    container_name: 3ms-nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+      - db
+      - frontend
+
+  api:
+    build: 
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: 3ms-api
+    env_file:
+      - ./.envs/.env.dev
+    volumes:
+      - ./api/:/usr/app
+    entrypoint: |
+      sh ./scripts/wait_for_postgres.sh
+        bash -c "python3 manage.py migrate &&
+          python3 manage.py runserver 0.0.0.0:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: 3ms-frontend
+    env_file:
+      - ./.envs/.env.dev
+    volumes:
+      - ./frontend/src:/usr/app/src

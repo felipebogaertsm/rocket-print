@@ -1,18 +1,28 @@
-FROM python:3.10-alpine
+FROM ubuntu:latest
 
 ENV PYTHONUNBUFFERED 1
+ENV DEBIAN_FRONTEND=noninteractive
 
-RUN pip3 install --upgrade pip setuptools wheel
-COPY ./requirements.txt /requirements.txt
-RUN pip3 install -r /requirements.txt
+RUN apt-get -y update && apt-get -y upgrade
+RUN apt-get -y install \
+    python3.11 \
+    python3-pip \
+    postgresql \
+    postgresql-contrib
 
 WORKDIR /usr/app
+COPY ./requirements.txt ./
+
+RUN pip3 install --upgrade pip setuptools wheel
+RUN pip3 install -r ./requirements.txt
+RUN pip3 install psycopg2-binary --no-binary psycopg2-binary
+
 COPY ./ ./
 
 RUN chmod +x ./scripts/*
 
-RUN adduser admin -D -H
-RUN chown -R admin:admin /usr/app
+RUN useradd admin
+RUN chown -R admin:admin ./
 USER admin
 
 EXPOSE 8000
