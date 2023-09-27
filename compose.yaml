@@ -29,6 +29,6 @@ services:
     env_file:
       - ./.envs/.env.dev
     volumes:
-      - ./app/src:/app/src
+      - ./app:/app
     entrypoint: |
       npm run dev
