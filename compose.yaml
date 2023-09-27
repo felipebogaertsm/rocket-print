@@ -1,7 +1,7 @@
 services:
   db:
     image: postgres:13.7
-    container_name: 3ms-db
+    container_name: rocketprint-db
     env_file:
       - ./.envs/.env.dev
     volumes:
@@ -14,34 +14,21 @@ services:
       context: ./nginx
       dockerfile: Dockerfile.dev
     restart: always
-    container_name: 3ms-nginx
+    container_name: rocketprint-nginx
     ports:
       - "80:80"
     depends_on:
-      - api
       - db
-      - frontend
+      - app
 
-  api:
-    build: 
-      context: ./api
-      dockerfile: Dockerfile
-    container_name: 3ms-api
-    env_file:
-      - ./.envs/.env.dev
-    volumes:
-      - ./api/:/usr/app
-    entrypoint: |
-      sh ./scripts/wait_for_postgres.sh
-        bash -c "python3 manage.py migrate &&
-          python3 manage.py runserver 0.0.0.0:8000"
-
-  frontend:
+  app:
     build:
-      context: ./frontend
+      context: ./app
       dockerfile: Dockerfile.dev
-    container_name: 3ms-frontend
+    container_name: rocketprint-app
     env_file:
       - ./.envs/.env.dev
     volumes:
-      - ./frontend/src:/usr/app/src
+      - ./app/src:/app/src
+    entrypoint: |
+      npm run dev
