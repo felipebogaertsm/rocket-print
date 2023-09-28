@@ -11,8 +11,25 @@ const config: Config = {
       animation: {
         tilt: "tilt 10s ease-in-out infinite",
         glow: "glow 1s ease-in-out infinite",
+        typewriter: "typewriter 2s steps(6), blink 1s infinite",
       },
       keyframes: {
+        typewriter: {
+          from: {
+            width: "0",
+          },
+          to: {
+            width: "6ch",
+          },
+        },
+        blink: {
+          from: {
+            "border-right-color": "transparent",
+          },
+          to: {
+            "border-right-color": "black",
+          },
+        },
         glow: {
           "0%, 100%": {
             opacity: "100%",
